@@ -1,5 +1,5 @@
 from dash import *
-from Figures.Figure_about import create_figure_about
+from Figures.Figure_about import create_figure_about,create_figure_map
 
 app = dash.Dash(__name__)
 
@@ -158,7 +158,10 @@ About_layout = html.Div(
                                                 style={
                                                     'width': '100%',
                                                     'height': '500px',
-                                                    'margin': '0 0 0 1OOpx'})
+                                                    'margin': '0 0 0 1OOpx'}),html.Div(children=[html.U(html.H3("Current Weather informations on the cities")),html.Br()]),
+
+                                        dcc.Graph(figure=create_figure_map())
+
 
                                     ]
 
