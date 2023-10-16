@@ -7,3 +7,10 @@
 - It is built using dash plotly  for better interactivity.
 - We tried to manipulate the architecture of dash by working on the flask layer  to use a multipage model for good user experience ,  and add an authentification system  using Mysql database ,SQLAlchemy, Flask login  for this purpose .
 
+<img src="./screenshots/login.webp" alt=""/>
+<br>
+<img src="./screenshots/sec_abt1.png" alt=""/>
+<br>
+<img src="./screenshots/forecast.webp" alt=""/>
+<br>
+<img src="./screenshots/sec_abt2.png" alt=""/>
