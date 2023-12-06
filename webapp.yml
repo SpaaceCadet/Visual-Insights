@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-service
+  template:
+    metadata:
+      labels:
+        app: webapp-service
+    spec:
+      containers:
+      - name: webapp-service
+        image: johnmacmillan1966/webapp:latest
+        ports:
+        - containerPort: 5000  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  ports:
+  - name: connport  # Name for connport
+    port: 5000
+    targetPort: 5000
+    nodePort: 30100
+  selector:
+    app: webapp-service
+  type: NodePort
