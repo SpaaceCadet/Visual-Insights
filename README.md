@@ -14,3 +14,20 @@
 <img src="./screenshots/forecast.webp" alt=""/>
 <br>
 <img src="./screenshots/sec_abt2.png" alt=""/>
+
+
+- This project was dockerized and decomposed into microservices using Tensorflow Serving , Mysql , and The web interface .
+
+<img src="./screenshots/TF_ seving.webp" alt=""/>
+
+<br>
+
+- The each component has it's own dockerfile,configuration(secrets ..) , yaml file .
+
+- The whole architecture can be deployed as a kubernetes cluster . 
+
+<br>
+
+<img src="./screenshots/docker.png" alt=""/>
+
+
