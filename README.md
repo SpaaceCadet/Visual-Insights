@@ -18,7 +18,7 @@
 
 - This project was dockerized and decomposed into microservices using Tensorflow Serving , Mysql , and The web interface .
 
-<img src="./screenshots/TF_ seving.webp" alt=""/>
+<img src="./screenshots/TF_serving.webp" alt=""/>
 
 <br>
 
