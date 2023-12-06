@@ -17,6 +17,7 @@
 
 
 - This project was dockerized and decomposed into microservices using Tensorflow Serving , Mysql , and The web interface .
+- The Tensorflow Serving was used to serve our three models through apis,perform versioning . it's more suitable for production environements. 
 
 <img src="./screenshots/TF_serving.webp" alt=""/>
 
