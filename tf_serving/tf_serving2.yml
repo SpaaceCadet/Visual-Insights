@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mymodel-serving
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mymodel-serving
+  template:
+    metadata:
+      labels:
+        app: mymodel-serving
+    spec:
+      containers:
+      - name: mymodel-serving
+        image: johnmacmillan1966/tf_serving:latest
+        ports:
+        - containerPort: 8500  # gRPC
+        - containerPort: 8501  # HTTP/REST
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mymodel-serving
+spec:
+  ports:
+  - name: grpc  # Name for gRPC port
+    port: 8500
+    targetPort: 8500
+    nodePort: 30111
+  - name: httprest  # Name for HTTP/REST port
+    port: 8501
+    targetPort: 8501
+    nodePort: 30112
+  selector:
+    app: mymodel-serving
+  type: NodePort
+
