@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+
+  mysql_database:
+    image: mysql:8
+    container_name: mysql_instance
+
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_password_file
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql_password_file
+      - MYSQL_USER_FILE=/run/secrets/mysql_user
+
+    networks:
+      yahya_prive:
+        ipv4_address: 10.12.13.2
+
+    cap_add:
+      - NET_ADMIN
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./secrets:/run/secrets
+      - ./mysql:/var/lib/mysql
+
+    restart: unless-stopped
+
+  tensorflow_serving:
+    image: tensorflow/serving
+    container_name: tflowserv
+    ports:
+      - "8500:8500"  # gRPC
+      - "8501:8501"  # REST API
+    volumes:
+      - ./tf_serving/model_config.config:/models/model_config.config
+      - ./tf_serving/models/Multivariate_cnn_lstm:/models/varcnnlstm
+      - ./tf_serving/models/MultivariateLstm3:/models/vanillalstm
+      - ./tf_serving/models/Multivariate_Lstm:/models/varlstm
+    command: ["tensorflow_model_server", "--model_config_file=/models/model_config.config"]
+    networks:
+      yahya_prive:
+        ipv4_address: 10.12.13.3
+    cap_add:
+      - NET_ADMIN
+
+
+  webapp:
+    image: webapp-test
+    container_name: webapp
+    ports:
+      - "5000:5000"  # http port
+    networks:
+        yahya_prive:
+          ipv4_address: 10.12.13.4
+    depends_on:
+      - tensorflow_serving
+      - mysql_database
+
+networks:
+  yahya_prive:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.12.13.0/24
+          gateway: 10.12.13.1

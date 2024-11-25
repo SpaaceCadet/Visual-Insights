@@ -1,0 +1,14 @@
+gunicorn
+dash
+flask_login
+dash_bootstrap_components
+sqlalchemy
+flask_sqlalchemy
+python-dotenv
+numpy
+mysqlclient
+mysql-connector-python
+joblib
+scikit-learn
+pandas
+
